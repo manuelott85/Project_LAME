@@ -19,10 +19,10 @@ public:
 	
 protected:
 	UPROPERTY(EditDefaultsOnly)
-	FGenericTeamId TeamId;
+	FGenericTeamId TeamID;
 
 public:
-	FGenericTeamId GetGenericTeamId() const override { return TeamId; }
+	FGenericTeamId GetGenericTeamId() const override;
 	ETeamAttitude::Type GetTeamAttitudeTowards(const AActor& Other) const override;
 	static ETeamAttitude::Type GetAttitudeTowards(FGenericTeamId TeamA, FGenericTeamId TeamB);
 

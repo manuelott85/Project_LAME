@@ -4,10 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Runtime/AIModule/Classes/GenericTeamAgentInterface.h"
 #include "AICharacter.generated.h"
 
 UCLASS()
-class PROJECT_LAME_API AAICharacter : public ACharacter
+class PROJECT_LAME_API AAICharacter : public ACharacter, public IGenericTeamAgentInterface
 {
 	GENERATED_BODY()
 
@@ -60,4 +61,20 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+protected:
+	//UPROPERTY(EditDefaultsOnly)
+	//	FGenericTeamId TeamID;
+
+public:
+	//FGenericTeamId GetGenericTeamId() const override { return TeamID; }
+	//ETeamAttitude::Type GetTeamAttitudeTowards(const AActor& Other) const override;
+
+	/** Assigns Team Agent to given TeamID */
+	void SetGenericTeamId(const FGenericTeamId& NewTeamID);
+
+	/** Retrieve team identifier in form of FGenericTeamId */
+	FGenericTeamId GetGenericTeamId() const;
+
+	/** Retrieved owner attitude toward given Other object */
+	ETeamAttitude::Type GetTeamAttitudeTowards(const AActor& Other) const;
 };

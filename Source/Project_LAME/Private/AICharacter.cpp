@@ -10,7 +10,7 @@
 #include "EngineGlobals.h"
 #include "Runtime/Engine/Classes/Engine/Engine.h"
 
-#define print(text) if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::White,text)
+#define print(color, text) if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 10, color, text)
 
 // Sets default values
 AAICharacter::AAICharacter()
@@ -123,4 +123,25 @@ void AAICharacter::MoveRight(float Value)
 		// add movement in that direction
 		AddMovementInput(Direction, Value);
 	}
+}
+
+/** Assigns Team Agent to given TeamID */
+void AAICharacter::SetGenericTeamId(const FGenericTeamId& NewTeamID)
+{
+	print(FColor::Green, GetName() + " sets a new TeamID");
+	Cast<IGenericTeamAgentInterface>(GetController())->SetGenericTeamId(NewTeamID);	// call the function in the controller
+}
+
+/** Retrieve team identifier in form of FGenericTeamId */
+FGenericTeamId AAICharacter::GetGenericTeamId() const
+{
+	print(FColor::Green, GetName() + " wants to know the GenericTeamID");
+	return Cast<IGenericTeamAgentInterface>(GetController())->GetGenericTeamId();	// call the function in the controller
+}
+
+/** Retrieved owner attitude toward given Other object */
+ETeamAttitude::Type AAICharacter::GetTeamAttitudeTowards(const AActor& Other) const
+{
+	print(FColor::Green, GetName() + " wants to know the attitude towards: " + Other.GetName());
+	return Cast<IGenericTeamAgentInterface>(GetController())->GetTeamAttitudeTowards(Other);	// call the function in the controller
 }
