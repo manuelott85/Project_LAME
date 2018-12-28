@@ -24,7 +24,7 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)
 	float BaseLookUpRate;
 
-	bool activateDebugLogging = true;
+	bool activateDebugLogging = false;
 
 protected:
 	// Called when the game starts or when spawned

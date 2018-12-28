@@ -13,7 +13,7 @@ ALAME_PlayerController::ALAME_PlayerController()
 
 FGenericTeamId ALAME_PlayerController::GetGenericTeamId() const
 {
-	print(FColor::Magenta, GetName() + ": Your Team ID is: " + FString::FromInt(TeamID.GetId()));
+	//print(FColor::Magenta, GetName() + ": Your Team ID is: " + FString::FromInt(TeamID.GetId()));
 	return TeamID;
 }
 
@@ -30,7 +30,7 @@ ETeamAttitude::Type ALAME_PlayerController::GetTeamAttitudeTowards(const AActor&
 		return GetAttitudeTowardsPlayer(Other);
 	}
 
-	print(FColor::Magenta, GetName() + ": Your attitude towards is: Neutral");
+	//print(FColor::Magenta, GetName() + ": Your attitude towards is: Neutral");
 	return ETeamAttitude::Neutral;
 }
 
@@ -38,18 +38,18 @@ ETeamAttitude::Type ALAME_PlayerController::GetAttitudeTowards(FGenericTeamId Te
 {
 	if (TeamA == TeamB)
 	{
-		print(FColor::Magenta, "Static PlayerCtrl: Your attitude towards is: Friendly");
+		//print(FColor::Magenta, "Static PlayerCtrl: Your attitude towards is: Friendly");
 		return ETeamAttitude::Friendly;
 	}
 	else
 	{
-		print(FColor::Magenta, "Static PlayerCtrl: Your attitude towards is: Hostile");
+		//print(FColor::Magenta, "Static PlayerCtrl: Your attitude towards is: Hostile");
 		return ETeamAttitude::Hostile;
 	}
 }
 
 ETeamAttitude::Type ALAME_PlayerController::GetAttitudeTowardsPlayer(const AActor& Other) const
 {
-	print(FColor::Magenta, GetName() + ": Your attitude towards the player is: Hostile");
+	//print(FColor::Magenta, GetName() + ": Your attitude towards the player is: Hostile");
 	return ETeamAttitude::Hostile;
 }

@@ -14,7 +14,7 @@ class PROJECT_LAME_API ALAME_PlayerCharacter : public ACharacter, public IGeneri
 	GENERATED_BODY()
 
 public:
-	bool activateDebugLogging = true;
+	bool activateDebugLogging = false;
 
 public:
 	// Sets default values for this character's properties
