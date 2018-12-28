@@ -8,9 +8,6 @@
 
 ALAME_PlayerController::ALAME_PlayerController()
 {
-	// Assign to Team 1
-	//SetGenericTeamId(FGenericTeamId(1));
-
 	FGenericTeamId::SetAttitudeSolver(&ALAME_PlayerController::GetAttitudeTowards);
 }
 
