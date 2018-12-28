@@ -14,6 +14,9 @@ class PROJECT_LAME_API ALAME_PlayerCharacter : public ACharacter, public IGeneri
 	GENERATED_BODY()
 
 public:
+	bool activateDebugLogging = true;
+
+public:
 	// Sets default values for this character's properties
 	ALAME_PlayerCharacter();
 
@@ -28,8 +31,13 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-private:
-	FGenericTeamId TeamId;
-	virtual FGenericTeamId GetGenericTeamId() const override;
+	/** Assigns Team Agent to given TeamID */
+	void SetGenericTeamId(const FGenericTeamId& NewTeamID);
+
+	/** Retrieve team identifier in form of FGenericTeamId */
+	FGenericTeamId GetGenericTeamId() const;
+
+	/** Retrieved owner attitude toward given Other object */
+	ETeamAttitude::Type GetTeamAttitudeTowards(const AActor& Other) const;
 
 };

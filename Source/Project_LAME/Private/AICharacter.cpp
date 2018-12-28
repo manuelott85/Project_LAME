@@ -15,6 +15,7 @@
 // Sets default values
 AAICharacter::AAICharacter()
 {
+
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
@@ -128,20 +129,23 @@ void AAICharacter::MoveRight(float Value)
 /** Assigns Team Agent to given TeamID */
 void AAICharacter::SetGenericTeamId(const FGenericTeamId& NewTeamID)
 {
-	print(FColor::Green, GetName() + " sets a new TeamID");
+	if(activateDebugLogging)
+		print(FColor::Green, GetName() + " sets a new TeamID");
 	Cast<IGenericTeamAgentInterface>(GetController())->SetGenericTeamId(NewTeamID);	// call the function in the controller
 }
 
 /** Retrieve team identifier in form of FGenericTeamId */
 FGenericTeamId AAICharacter::GetGenericTeamId() const
 {
-	print(FColor::Green, GetName() + " wants to know the GenericTeamID");
+	if (activateDebugLogging)
+		print(FColor::Green, GetName() + " wants to know the GenericTeamID");
 	return Cast<IGenericTeamAgentInterface>(GetController())->GetGenericTeamId();	// call the function in the controller
 }
 
 /** Retrieved owner attitude toward given Other object */
 ETeamAttitude::Type AAICharacter::GetTeamAttitudeTowards(const AActor& Other) const
 {
-	print(FColor::Green, GetName() + " wants to know the attitude towards: " + Other.GetName());
+	if (activateDebugLogging)
+		print(FColor::Green, GetName() + " wants to know the attitude towards: " + Other.GetName());
 	return Cast<IGenericTeamAgentInterface>(GetController())->GetTeamAttitudeTowards(Other);	// call the function in the controller
 }

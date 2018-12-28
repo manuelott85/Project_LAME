@@ -24,6 +24,8 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)
 	float BaseLookUpRate;
 
+	bool activateDebugLogging = true;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -61,14 +63,7 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-protected:
-	//UPROPERTY(EditDefaultsOnly)
-	//	FGenericTeamId TeamID;
-
 public:
-	//FGenericTeamId GetGenericTeamId() const override { return TeamID; }
-	//ETeamAttitude::Type GetTeamAttitudeTowards(const AActor& Other) const override;
-
 	/** Assigns Team Agent to given TeamID */
 	void SetGenericTeamId(const FGenericTeamId& NewTeamID);
 

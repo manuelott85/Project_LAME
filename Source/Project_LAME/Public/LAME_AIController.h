@@ -18,8 +18,8 @@ public:
 	ALAME_AIController();
 	
 protected:
-	UPROPERTY(EditDefaultsOnly)
-	FGenericTeamId TeamID;
+	UPROPERTY(EditDefaultsOnly, Category = "AI")
+	FGenericTeamId TeamID = 2;
 
 public:
 	FGenericTeamId GetGenericTeamId() const override;

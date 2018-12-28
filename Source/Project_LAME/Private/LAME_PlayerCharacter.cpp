@@ -1,6 +1,10 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "LAME_PlayerCharacter.h"
+#include "EngineGlobals.h"
+#include "Runtime/Engine/Classes/Engine/Engine.h"
+
+#define print(color, text) if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 10, color, text)
 
 // Sets default values
 ALAME_PlayerCharacter::ALAME_PlayerCharacter()
@@ -9,13 +13,13 @@ ALAME_PlayerCharacter::ALAME_PlayerCharacter()
 	PrimaryActorTick.bCanEverTick = true;
 
 	// Assign to Team 1
-	TeamId = FGenericTeamId(0);
+	//TeamId = FGenericTeamId(0);
 }
 
-FGenericTeamId ALAME_PlayerCharacter::GetGenericTeamId() const
-{
-	return TeamId;
-}
+//FGenericTeamId ALAME_PlayerCharacter::GetGenericTeamId() const
+//{
+//	return TeamId;
+//}
 
 // Called when the game starts or when spawned
 void ALAME_PlayerCharacter::BeginPlay()
@@ -38,3 +42,26 @@ void ALAME_PlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInp
 
 }
 
+/** Assigns Team Agent to given TeamID */
+void ALAME_PlayerCharacter::SetGenericTeamId(const FGenericTeamId& NewTeamID)
+{
+	if (activateDebugLogging)
+		print(FColor::Cyan, GetName() + " sets a new TeamID");
+	Cast<IGenericTeamAgentInterface>(GetController())->SetGenericTeamId(NewTeamID);	// call the function in the controller
+}
+
+/** Retrieve team identifier in form of FGenericTeamId */
+FGenericTeamId ALAME_PlayerCharacter::GetGenericTeamId() const
+{
+	if (activateDebugLogging)
+		print(FColor::Cyan, GetName() + " wants to know the GenericTeamID");
+	return Cast<IGenericTeamAgentInterface>(GetController())->GetGenericTeamId();	// call the function in the controller
+}
+
+/** Retrieved owner attitude toward given Other object */
+ETeamAttitude::Type ALAME_PlayerCharacter::GetTeamAttitudeTowards(const AActor& Other) const
+{
+	if (activateDebugLogging)
+		print(FColor::Cyan, GetName() + " wants to know the attitude towards: " + Other.GetName());
+	return Cast<IGenericTeamAgentInterface>(GetController())->GetTeamAttitudeTowards(Other);	// call the function in the controller
+}
