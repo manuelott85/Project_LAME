@@ -15,7 +15,8 @@ class PROJECT_LAME_API ALAME_AIController : public AAIController
 	GENERATED_BODY()
 
 public:
-	ALAME_AIController();
+	//ALAME_AIController();
+	ALAME_AIController(const FObjectInitializer& ObjectInitializer);
 	
 protected:
 	UPROPERTY(EditDefaultsOnly, Category = "AI")

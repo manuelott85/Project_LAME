@@ -1,12 +1,15 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "LAME_AIController.h"
+#include "Runtime/AIModule/Classes/Navigation/CrowdFollowingComponent.h"
 #include "EngineGlobals.h"
 #include "Runtime/Engine/Classes/Engine/Engine.h"
 
 #define print(color, text) if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 10, color, text)
 
-ALAME_AIController::ALAME_AIController()
+//ALAME_AIController::ALAME_AIController()
+ALAME_AIController::ALAME_AIController(const FObjectInitializer& ObjectInitializer)
+	: Super(ObjectInitializer.SetDefaultSubobjectClass<UCrowdFollowingComponent>(TEXT("PathFollowingComponent")))
 {
 	// Assign to Team 1
 	//SetGenericTeamId(FGenericTeamId(1));

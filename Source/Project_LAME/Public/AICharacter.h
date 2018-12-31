@@ -14,7 +14,8 @@ class PROJECT_LAME_API AAICharacter : public ACharacter, public IGenericTeamAgen
 
 public:
 	// Sets default values for this character's properties
-	AAICharacter(const FObjectInitializer& ObjectInitializer);
+	AAICharacter();
+	//AAICharacter(const FObjectInitializer& ObjectInitializer);
 
 	/** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)
