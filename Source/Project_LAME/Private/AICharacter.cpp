@@ -135,7 +135,10 @@ void AAICharacter::SetGenericTeamId(const FGenericTeamId& NewTeamID)
 {
 	if(activateDebugLogging)
 		print(FColor::Green, GetName() + " sets a new TeamID");
-	Cast<IGenericTeamAgentInterface>(GetController())->SetGenericTeamId(NewTeamID);	// call the function in the controller
+
+	IGenericTeamAgentInterface* currentInterface = Cast<IGenericTeamAgentInterface>(GetController());
+	if (currentInterface)
+		currentInterface->SetGenericTeamId(NewTeamID);
 }
 
 /** Retrieve team identifier in form of FGenericTeamId */
@@ -143,7 +146,14 @@ FGenericTeamId AAICharacter::GetGenericTeamId() const
 {
 	if (activateDebugLogging)
 		print(FColor::Green, GetName() + " wants to know the GenericTeamID");
-	return Cast<IGenericTeamAgentInterface>(GetController())->GetGenericTeamId();	// call the function in the controller
+
+	FGenericTeamId value = 255;
+
+	IGenericTeamAgentInterface* currentInterface = Cast<IGenericTeamAgentInterface>(GetController());
+	if (currentInterface)
+		value = currentInterface->GetGenericTeamId();
+
+	return value;
 }
 
 /** Retrieved owner attitude toward given Other object */
@@ -151,5 +161,11 @@ ETeamAttitude::Type AAICharacter::GetTeamAttitudeTowards(const AActor& Other) co
 {
 	if (activateDebugLogging)
 		print(FColor::Green, GetName() + " wants to know the attitude towards: " + Other.GetName());
-	return Cast<IGenericTeamAgentInterface>(GetController())->GetTeamAttitudeTowards(Other);	// call the function in the controller
+
+	ETeamAttitude::Type value = ETeamAttitude::Hostile;
+	
+	IGenericTeamAgentInterface* currentInterface = Cast<IGenericTeamAgentInterface>(GetController());
+	if (currentInterface)
+		value = currentInterface->GetTeamAttitudeTowards(Other);
+	return value;
 }
