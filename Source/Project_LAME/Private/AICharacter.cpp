@@ -7,7 +7,6 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/Controller.h"
 #include "GameFramework/SpringArmComponent.h"
-//#include "Runtime/AIModule/Classes/Navigation/CrowdFollowingComponent.h"
 
 #include "EngineGlobals.h"
 #include "Runtime/Engine/Classes/Engine/Engine.h"
@@ -15,8 +14,6 @@
 #define print(color, text) if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 10, color, text)
 
 // Sets default values
-//AAICharacter::AAICharacter(const FObjectInitializer& ObjectInitializer)
-//	: Super(ObjectInitializer.SetDefaultSubobjectClass<UCrowdFollowingComponent>(TEXT("PathFollowingComponent")))
 AAICharacter::AAICharacter()
 {
 
