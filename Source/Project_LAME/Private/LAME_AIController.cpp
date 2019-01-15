@@ -34,7 +34,7 @@ ETeamAttitude::Type ALAME_AIController::GetTeamAttitudeTowards(const AActor& Oth
 		return GetAttitudeTowardsPlayer(Other);
 	}
 
-	//print(FColor::Yellow, GetName() + ": Your attitude towards is: Neutral");
+	//print(FColor::Yellow, GetName() + ": Your attitude towards " + Other.GetName() + " is: Neutral");
 	return ETeamAttitude::Neutral;
 }
 
@@ -42,12 +42,12 @@ ETeamAttitude::Type ALAME_AIController::GetAttitudeTowards(FGenericTeamId TeamA,
 {
 	if (TeamA == TeamB)
 	{
-		//print(FColor::Yellow, "Static AICtrl: Your attitude towards is: Friendly");
+		//print(FColor::Yellow, "Static AICtrl: The attitude of " + FString::FromInt(TeamA.GetId()) + " towards " + FString::FromInt(TeamB.GetId()) + " is: Friendly");
 		return ETeamAttitude::Friendly;
 	}
 	else
 	{
-		//print(FColor::Yellow, "Static AICtrl: Your attitude towards is: Hostile");
+		//print(FColor::Yellow, "Static AICtrl: The attitude of " + FString::FromInt(TeamA.GetId()) + " towards " + FString::FromInt(TeamB.GetId()) + " is: Hostile");
 		return ETeamAttitude::Hostile;
 	}
 }

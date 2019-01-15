@@ -24,6 +24,10 @@ protected:
 	FGenericTeamId TeamID = 1;
 
 public:
+	/** Assigns Team Agent to given TeamID */
+	UFUNCTION(BlueprintCallable)
+	void SetGenericTeamId(const FGenericTeamId& NewTeamID);
+
 	FGenericTeamId GetGenericTeamId() const override;
 	ETeamAttitude::Type GetTeamAttitudeTowards(const AActor& Other) const override;
 	static ETeamAttitude::Type GetAttitudeTowards(FGenericTeamId TeamA, FGenericTeamId TeamB);

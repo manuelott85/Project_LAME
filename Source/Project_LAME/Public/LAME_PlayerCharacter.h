@@ -32,6 +32,7 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	/** Assigns Team Agent to given TeamID */
+	UFUNCTION(BlueprintCallable)
 	void SetGenericTeamId(const FGenericTeamId& NewTeamID);
 
 	/** Retrieve team identifier in form of FGenericTeamId */
