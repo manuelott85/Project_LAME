@@ -19,7 +19,7 @@ ALAME_AIController::ALAME_AIController(const FObjectInitializer& ObjectInitializ
 
 FGenericTeamId ALAME_AIController::GetGenericTeamId() const
 {
-	//print(FColor::Yellow, GetName() + ": Your Team ID is: " + FString::FromInt(TeamID.GetId()));
+	//print(FColor::Yellow, "The TeamID of " + GetName() + " is: " + FString::FromInt(TeamID.GetId()));
 	return TeamID;
 }
 
@@ -33,8 +33,7 @@ ETeamAttitude::Type ALAME_AIController::GetTeamAttitudeTowards(const AActor& Oth
 		}
 		return GetAttitudeTowardsPlayer(Other);
 	}
-
-	//print(FColor::Yellow, GetName() + ": Your attitude towards " + Other.GetName() + " is: Neutral");
+	//print(FColor::Yellow, "The attitude of " + GetName() + " towards " + Other.GetName() + " is: Neutral");
 	return ETeamAttitude::Neutral;
 }
 
@@ -54,6 +53,6 @@ ETeamAttitude::Type ALAME_AIController::GetAttitudeTowards(FGenericTeamId TeamA,
 
 ETeamAttitude::Type ALAME_AIController::GetAttitudeTowardsPlayer(const AActor& Other) const
 {
-	//print(FColor::Yellow, GetName() + ": Your attitude towards the player is: Hostile");
+	//print(FColor::Yellow, "The attitude of " + GetName() + " towards the player is: Hostile");
 	return ETeamAttitude::Hostile;
 }

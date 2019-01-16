@@ -38,25 +38,31 @@ void AAIPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 /** Assigns Team Agent to given TeamID */
 void AAIPawn::SetGenericTeamId(const FGenericTeamId& NewTeamID)
 {
-	if (activateDebugLogging)
-		print(FColor::Green, GetName() + " sets a new TeamID");
-
 	IGenericTeamAgentInterface* currentInterface = Cast<IGenericTeamAgentInterface>(GetController());
 	if (currentInterface)
 		currentInterface->SetGenericTeamId(NewTeamID);
+	else
+		if (activateDebugLogging)
+			print(FColor::Red, GetName() + " current Interface missing (SetGenericTeamId)!");
+
+	if (activateDebugLogging)
+		print(FColor::Green, GetName() + " sets his TeamID to: " + FString::FromInt(NewTeamID));
 }
 
 /** Retrieve team identifier in form of FGenericTeamId */
 FGenericTeamId AAIPawn::GetGenericTeamId() const
 {
-	if (activateDebugLogging)
-		print(FColor::Green, GetName() + " wants to know the GenericTeamID");
-
 	FGenericTeamId value = 255;
 
 	IGenericTeamAgentInterface* currentInterface = Cast<IGenericTeamAgentInterface>(GetController());
 	if (currentInterface)
 		value = currentInterface->GetGenericTeamId();
+	else
+		if (activateDebugLogging)
+			print(FColor::Red, GetName() + " current Interface missing (GetGenericTeamId)!");
+
+	if (activateDebugLogging)
+		print(FColor::Green, GetName() + " reports his GenericTeamID: " + FString::FromInt(value));
 
 	return value;
 }
@@ -64,13 +70,17 @@ FGenericTeamId AAIPawn::GetGenericTeamId() const
 /** Retrieved owner attitude toward given Other object */
 ETeamAttitude::Type AAIPawn::GetTeamAttitudeTowards(const AActor& Other) const
 {
-	if (activateDebugLogging)
-		print(FColor::Green, GetName() + " wants to know the attitude towards: " + Other.GetName());
-
 	ETeamAttitude::Type value = ETeamAttitude::Hostile;
 
 	IGenericTeamAgentInterface* currentInterface = Cast<IGenericTeamAgentInterface>(GetController());
 	if (currentInterface)
 		value = currentInterface->GetTeamAttitudeTowards(Other);
+	else
+		if (activateDebugLogging)
+			print(FColor::Red, GetName() + " current Interface missing (GetTeamAttitudeTowards)!");
+
+	if (activateDebugLogging)
+		print(FColor::Green, "The attitude of " + GetName() + " towards " + Other.GetName() + " is: " + FString::FromInt(value));
+
 	return value;
 }

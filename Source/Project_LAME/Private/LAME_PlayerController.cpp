@@ -14,13 +14,13 @@ ALAME_PlayerController::ALAME_PlayerController()
 /** Assigns Team Agent to given TeamID */
 void ALAME_PlayerController::SetGenericTeamId(const FGenericTeamId& NewTeamID)
 {
-	//print(FColor::Cyan, GetName() + " sets a new TeamID to: " + FString::FromInt(NewTeamID.GetId()));
+	//print(FColor::Magenta, GetName() + " sets his TeamID to: " + FString::FromInt(NewTeamID));
 	TeamID = NewTeamID;
 }
 
 FGenericTeamId ALAME_PlayerController::GetGenericTeamId() const
 {
-	//print(FColor::Magenta, GetName() + ": Your Team ID is: " + FString::FromInt(TeamID.GetId()));
+	//print(FColor::Magenta, "The TeamID of " + GetName() + " is: " + FString::FromInt(TeamID.GetId()));
 	return TeamID;
 }
 
@@ -31,13 +31,12 @@ ETeamAttitude::Type ALAME_PlayerController::GetTeamAttitudeTowards(const AActor&
 		if (const IGenericTeamAgentInterface* TeamAgent = Cast<IGenericTeamAgentInterface>(OtherCharacter->GetController()))
 		{
 			//return Super::GetTeamAttitudeTowards(*OtherCharacter->GetController());
-			print(FColor::Red, GetName() + ": Your attitude towards " + Other.GetName() + " is: ERROR");
+			print(FColor::Red, GetName() + ": Your attitude towards " + Other.GetName() + " is: ERROR and Hostile by default");
 			return ETeamAttitude::Hostile;
 		}
 		return GetAttitudeTowardsPlayer(Other);
 	}
-
-	//print(FColor::Magenta, GetName() + ": Your attitude towards " + Other.GetName() + " is: Neutral");
+	//print(FColor::Magenta, "The attitude of " + GetName() + " towards " + Other.GetName() + " is: Neutral");
 	return ETeamAttitude::Neutral;
 }
 
@@ -45,18 +44,18 @@ ETeamAttitude::Type ALAME_PlayerController::GetAttitudeTowards(FGenericTeamId Te
 {
 	if (TeamA == TeamB)
 	{
-		//print(FColor::Yellow, "Static AICtrl: The attitude of " + FString::FromInt(TeamA.GetId()) + " towards " + FString::FromInt(TeamB.GetId()) + " is: Friendly");
+		//print(FColor::Magenta, "Static AICtrl: The attitude of " + FString::FromInt(TeamA.GetId()) + " towards " + FString::FromInt(TeamB.GetId()) + " is: Friendly");
 		return ETeamAttitude::Friendly;
 	}
 	else
 	{
-		//print(FColor::Yellow, "Static AICtrl: The attitude of " + FString::FromInt(TeamA.GetId()) + " towards " + FString::FromInt(TeamB.GetId()) + " is: Hostile");
+		//print(FColor::Magenta, "Static AICtrl: The attitude of " + FString::FromInt(TeamA.GetId()) + " towards " + FString::FromInt(TeamB.GetId()) + " is: Hostile");
 		return ETeamAttitude::Hostile;
 	}
 }
 
 ETeamAttitude::Type ALAME_PlayerController::GetAttitudeTowardsPlayer(const AActor& Other) const
 {
-	//print(FColor::Magenta, GetName() + ": Your attitude towards the player is: Hostile");
+	//print(FColor::Magenta, "The attitude of " + GetName() + " towards the player is: Hostile");
 	return ETeamAttitude::Hostile;
 }

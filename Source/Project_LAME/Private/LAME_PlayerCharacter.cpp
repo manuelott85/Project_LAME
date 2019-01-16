@@ -37,33 +37,49 @@ void ALAME_PlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInp
 /** Assigns Team Agent to given TeamID */
 void ALAME_PlayerCharacter::SetGenericTeamId(const FGenericTeamId& NewTeamID)
 {
+	IGenericTeamAgentInterface* currentInterface = Cast<IGenericTeamAgentInterface>(GetController());
+	if (currentInterface)
+		currentInterface->SetGenericTeamId(NewTeamID);	// call the function in the controller
+	else
+		if (activateDebugLogging)
+			print(FColor::Red, GetName() + " current Interface missing (SetGenericTeamId)!");
+
 	if (activateDebugLogging)
-		print(FColor::Cyan, GetName() + " sets a new TeamID");
-	Cast<IGenericTeamAgentInterface>(GetController())->SetGenericTeamId(NewTeamID);	// call the function in the controller
+		print(FColor::Cyan, GetName() + " sets his TeamID to: " + FString::FromInt(NewTeamID));
 }
 
 /** Retrieve team identifier in form of FGenericTeamId */
 FGenericTeamId ALAME_PlayerCharacter::GetGenericTeamId() const
 {
-	if (activateDebugLogging)
-		print(FColor::Cyan, GetName() + " wants to know the GenericTeamID");
-
 	FGenericTeamId value = 255;
 
-	AController* currentController = GetController();
-	if (currentController)
-	{
-		IGenericTeamAgentInterface* currentInterface = Cast<IGenericTeamAgentInterface>(currentController);
-		if (currentInterface)
-			value = Cast<IGenericTeamAgentInterface>(GetController())->GetGenericTeamId();
-	}
+	IGenericTeamAgentInterface* currentInterface = Cast<IGenericTeamAgentInterface>(GetController());
+	if (currentInterface)
+		value = currentInterface->GetGenericTeamId();
+	else
+		if (activateDebugLogging)
+			print(FColor::Red, GetName() + " current Interface missing (GetGenericTeamId)!");
+
+	if (activateDebugLogging)
+		print(FColor::Cyan, GetName() + " reports his GenericTeamID: " + FString::FromInt(value));
+
 	return value;
 }
 
 /** Retrieved owner attitude toward given Other object */
 ETeamAttitude::Type ALAME_PlayerCharacter::GetTeamAttitudeTowards(const AActor& Other) const
 {
+	ETeamAttitude::Type value = ETeamAttitude::Hostile;
+
+	IGenericTeamAgentInterface* currentInterface = Cast<IGenericTeamAgentInterface>(GetController());
+	if (currentInterface)
+		value = currentInterface->GetTeamAttitudeTowards(Other);
+	else
+		if (activateDebugLogging)
+			print(FColor::Red, GetName() + " current Interface missing (GetTeamAttitudeTowards)!");
+
 	if (activateDebugLogging)
-		print(FColor::Cyan, GetName() + " wants to know the attitude towards: " + Other.GetName());
-	return Cast<IGenericTeamAgentInterface>(GetController())->GetTeamAttitudeTowards(Other);	// call the function in the controller
+		print(FColor::Cyan, "The attitude of " + GetName() + " towards " + Other.GetName() + " is: " + FString::FromInt(value));
+
+	return value;
 }
